@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import CreateModel from './Containers/CreateModel'
+import Parameter from './Components/Parameter'
+import Expression from './Components/Expression'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+	const expressions = new Expression('fixed_model')
+	expressions.pushParam(
+		new Parameter({
+			label: 'Variety',
+			Class: 'value',
+			values: 'Variety',
+			typeOfCal: 'id'
+		}).getReactComponent()
+	)
+	expressions.pushParam(
+		new Parameter({
+			label: '+',
+			Class: 'operator',
+			values: '+',
+			typeOfCal: ''
+		}).getReactComponent()
+	)
+	return (
+		<div>
+			<CreateModel>
+				{expressions.getExpression().map(exp => exp)}
+				<p>{`Size of expression = ${expressions.expressionSize()}`}</p>
+			</CreateModel>
+		</div>
+	)
 }
 
-export default App;
+export default App
