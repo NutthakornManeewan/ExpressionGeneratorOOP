@@ -1,4 +1,3 @@
-import React from 'react'
 class Parameter {
 	constructor({ label, Class, values, typeOfCal }) {
 		this.label = label
@@ -15,9 +14,6 @@ class Parameter {
 		values: this.values,
 		typeOfCal: this.typeOfCal
 	})
-	getReactComponent = () => {
-		return <h4>{this.label}</h4>
-	}
 }
 
 export default Parameter

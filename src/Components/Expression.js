@@ -1,3 +1,4 @@
+import React from 'react'
 class Expression {
 	constructor(name = 'untitled', allowOperators = ['+', '.']) {
 		this.name = name
@@ -22,6 +23,9 @@ class Expression {
 			this.isOperatorAllows(param.label)
 		)
 			this.updateExpression(this.expression, param)
+	}
+	renderExpression = () => {
+		return this.expression.map(exp => <h4>{exp.label}</h4>)
 	}
 
 	// private method (virtual)

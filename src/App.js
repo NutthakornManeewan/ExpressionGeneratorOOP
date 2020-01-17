@@ -1,48 +1,50 @@
-import React from 'react'
-import CreateModel from './Containers/CreateModel'
+import React, { useEffect } from 'react'
 import Parameter from './Components/Parameter'
 import Expression from './Components/Expression'
+const expressions = new Expression('fixed_model')
 
 const App = () => {
-	const expressions = new Expression('fixed_model')
-	const component1 = new Parameter({
-		label: 'variety',
-		values: 'variety',
-		Class: 'value',
-		typeOfCal: 'id'
-	})
-	const component2 = new Parameter({
-		label: '+',
-		Class: 'operator',
-		values: '+',
-		typeOfCal: ''
-	})
-	expressions.pushParam(component1)
-	expressions.pushParam(component2)
-	expressions.pushParam(
-		new Parameter({
-			label: 'EarHeight',
-			Class: 'value',
-			value: '15',
-			typeOfCal: 'ear_height'
-		})
-	)
-	expressions.pushParam(
-		new Parameter({
-			label: '*',
-			Class: 'operator',
-			values: '*',
-			typeOfCal: ''
-		})
-	)
+	const addNewOperator = () => {
+		expressions.pushParam(
+			new Parameter({
+				label: Math.random() < 0.5 ? '+' : '.',
+				values: '+',
+				typeOfCal: '',
+				Class: 'operator'
+			})
+		)
+	}
+	const addNewParam = () => {
+		expressions.pushParam(
+			new Parameter({
+				label: 'A',
+				values: 'A',
+				typeOfCal: 'type',
+				Class: 'value'
+			})
+		)
+	}
+	useEffect(() => {
+		console.log(expressions)
+	}, [])
+
+	const renderParams = () => {
+		console.log(expressions)
+		const expression_list = expressions.getExpression()
+		if (!!expression_list) {
+			return expression_list.map(expr => (
+				<h4>{expr.getParams().label}</h4>
+			))
+		}
+	}
+
 	return (
 		<div>
-			<CreateModel>
-				{expressions
-					.getExpression()
-					.map(exp => exp.getReactComponent())}
-				<p>{`Size of expression = ${expressions.expressionSize()}`}</p>
-			</CreateModel>
+			<button onClick={() => addNewParam()}>Create new operand</button>
+			<button onClick={() => addNewOperator()}>
+				Create new operator
+			</button>
+			{renderParams()}
 		</div>
 	)
 }
