@@ -5,26 +5,42 @@ import Expression from './Components/Expression'
 
 const App = () => {
 	const expressions = new Expression('fixed_model')
+	const component1 = new Parameter({
+		label: 'variety',
+		values: 'variety',
+		Class: 'value',
+		typeOfCal: 'id'
+	})
+	const component2 = new Parameter({
+		label: '+',
+		Class: 'operator',
+		values: '+',
+		typeOfCal: ''
+	})
+	expressions.pushParam(component1)
+	expressions.pushParam(component2)
 	expressions.pushParam(
 		new Parameter({
-			label: 'Variety',
+			label: 'EarHeight',
 			Class: 'value',
-			values: 'Variety',
-			typeOfCal: 'id'
-		}).getReactComponent()
+			value: '15',
+			typeOfCal: 'ear_height'
+		})
 	)
 	expressions.pushParam(
 		new Parameter({
-			label: '+',
+			label: '*',
 			Class: 'operator',
-			values: '+',
+			values: '*',
 			typeOfCal: ''
-		}).getReactComponent()
+		})
 	)
 	return (
 		<div>
 			<CreateModel>
-				{expressions.getExpression().map(exp => exp)}
+				{expressions
+					.getExpression()
+					.map(exp => exp.getReactComponent())}
 				<p>{`Size of expression = ${expressions.expressionSize()}`}</p>
 			</CreateModel>
 		</div>
