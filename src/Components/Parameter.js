@@ -1,19 +1,35 @@
-class Parameter {
-	constructor({ label, Class, values, typeOfCal }) {
-		this.label = label
-		this.Class = Class
-		this.values = values
-		this.typeOfCal = typeOfCal
-		this.isOperator = Class === 'operator' ? true : false
+import React, { PureComponent } from 'react'
+class Parameter extends PureComponent {
+	constructor(props) {
+		super(props)
+		const { label, Class, values, typeOfCal } = { ...props }
+		this.state = {
+			label: label,
+			Class: Class,
+			values: values,
+			typeOfCal: typeOfCal,
+			isOperator: Class === 'operator' ? true : false
+		}
 	}
-	isOperator = () => this.isOperator
-	setTypeOfCal = type_of_cal => (this.typeOfCal = type_of_cal)
+
+	setTypeOfCal = type_of_cal => {
+		let { typeOfCal } = { ...this.state }
+		typeOfCal = type_of_cal
+		this.setState({ typeOfCal })
+	}
 	getParams = () => ({
 		label: this.label,
 		Class: this.Class,
 		values: this.values,
 		typeOfCal: this.typeOfCal
 	})
+	render() {
+		return (
+			<>
+				<h4>{`${this.state.label} | ${this.state.typeOfCal}`}</h4>
+			</>
+		)
+	}
 }
 
 export default Parameter
