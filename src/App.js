@@ -1,6 +1,6 @@
 import React from 'react'
 import Expression from './Components/Expression/Expression'
-const FixedModel = <Expression name="FixedModel" allowOperators={['+', '.']} />
+import FixedModel from "./Components/Expression/FixedModel";
 const RandomModel = (
 	<Expression name="RandomModel" allowOperators={['+', '.', '||', '&']} />
 )
@@ -11,9 +11,9 @@ class App extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				{FixedModel}
 				{RandomModel}
 				{ResidualModel}
+				<FixedModel name="fixed_model" allowOperators={["+","."]} />
 			</div>
 		)
 	}
