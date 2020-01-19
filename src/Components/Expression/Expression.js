@@ -1,13 +1,15 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
+import _ from "lodash"
 import Parameter from '../Parameter'
 import CreateNewParam from '../../utils/createNewParam'
-class Expression extends PureComponent {
+class Expression extends Component {
 	constructor(props) {
 		super(props)
 		let { name, allowOperators } = { ...props }
 		this.state = {
 			name,
 			size: 0,
+			isEnd: false,
 			expression: [],
 			isVarianceStructure: true,
 			allowPushOperand: true,
@@ -37,6 +39,7 @@ class Expression extends PureComponent {
 		let { size, allowPushOperand } = { ...this.state }
 		expression_list.push(
 			<Parameter
+				key={_.uniqueId('param_')}
 				label={param.label}
 				values={param.values}
 				Class={param.Class}

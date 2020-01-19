@@ -1,10 +1,15 @@
-import CreateNewParam from "../../utils/createNewParam"
+import CreateNewParam from '../../utils/createNewParam'
 import Expression from './Expression'
 import React from 'react'
 
 class FixedModel extends Expression {
-	constructor(props) {
-		super(props)
+	componentDidUpdate() {
+		if (
+			!this.state.isEnd &&
+			this.state.expression.some(expr => expr.props.label === '&')
+		) {
+			this.setState({ isEnd: true })
+		}
 	}
 
 	render() {
@@ -12,6 +17,7 @@ class FixedModel extends Expression {
 			<div>
 				<h3>{this.state.name}</h3>
 				<button
+					disabled={this.state.isEnd}
 					onClick={() =>
 						this.pushParam(
 							CreateNewParam({
@@ -24,6 +30,7 @@ class FixedModel extends Expression {
 					OPERAND
 				</button>
 				<button
+					disabled={this.state.isEnd}
 					onClick={() =>
 						this.pushParam(
 							CreateNewParam({ Class: 'operator', typeOfCal: '' })

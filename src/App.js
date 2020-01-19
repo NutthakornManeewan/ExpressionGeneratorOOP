@@ -13,7 +13,7 @@ class App extends React.PureComponent {
 			<div>
 				{RandomModel}
 				{ResidualModel}
-				<FixedModel name="fixed_model" allowOperators={["+","."]} />
+				<FixedModel name="fixed_model" allowOperators={["+",".", "&"]} />
 			</div>
 		)
 	}
