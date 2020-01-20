@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import _ from "lodash"
+import _ from 'lodash'
 import Parameter from '../Parameter'
 import CreateNewParam from '../../utils/createNewParam'
 class Expression extends Component {
@@ -50,6 +50,7 @@ class Expression extends Component {
 		allowPushOperand = !allowPushOperand
 		this.setState({ size, allowPushOperand, expression: expression_list })
 	}
+
 	isOperatorAllows = operator => {
 		return this.state.allowOperators.some(ope => ope === operator)
 	}

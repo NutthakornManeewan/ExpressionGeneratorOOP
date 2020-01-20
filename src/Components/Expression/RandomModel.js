@@ -2,14 +2,26 @@ import CreateNewParam from '../../utils/createNewParam'
 import Expression from './Expression'
 import React from 'react'
 
-class FixedModel extends Expression {
+class RandomModel extends Expression {
 	componentDidUpdate() {
-		if (
-			!this.state.isEnd &&
-			this.state.expression.some(expr => expr.props.label === '&')
-		) {
-			this.setState({ isEnd: true })
-		}
+		if (this.haveOrOperator()) this.setState({ isEnd: true })
+		if (this.haveAndOperator()) this.changeToCovariance()
+	}
+
+	haveAndOperator = () => {
+		let { isVarianceStructure, expression } = { ...this.state }
+		return (
+			!isVarianceStructure &&
+			expression.some(expr => expr.props.label === '&')
+		)
+	}
+	haveOrOperator = () => {
+		let { isEnd, expression } = { ...this.state }
+		return (
+			!isEnd &&
+			expression.some(expr => expr.props.label === '||') &&
+			expression.slice(-1)[0].props.Class === 'value'
+		)
 	}
 
 	render() {
@@ -45,4 +57,4 @@ class FixedModel extends Expression {
 	}
 }
 
-export default FixedModel
+export default RandomModel
