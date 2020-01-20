@@ -33,6 +33,13 @@ class Expression extends Component {
 		)
 			this.updateExpression(expression, param)
 	}
+	getJsonExpression = () => {
+		return JSON.stringify({
+			name: this.state.name,
+			isVarianceStructure: this.state.isVarianceStructure,
+			expression: this.state.expression.map(expr => expr.props)
+		})
+	}
 
 	// private method (virtual)
 	updateExpression = (expression_list, param) => {
@@ -81,6 +88,7 @@ class Expression extends Component {
 					OPERAND
 				</button>
 				{this.state.expression.map(expr => expr)}
+				{this.getJsonExpression()}
 			</div>
 		)
 	}

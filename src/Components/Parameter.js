@@ -26,7 +26,7 @@ class Parameter extends PureComponent {
 	render() {
 		return (
 			<>
-				<h4>{`${this.state.label} | ${this.state.typeOfCal}`}</h4>
+				<h4>{`${this.state.label} | ${this.state.typeOfCal} | ${this.state.Class}`}</h4>
 			</>
 		)
 	}

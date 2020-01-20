@@ -5,13 +5,13 @@ import React from 'react'
 class RandomModel extends Expression {
 	componentDidUpdate() {
 		if (this.haveOrOperator()) this.setState({ isEnd: true })
-		if (this.haveAndOperator()) this.changeToCovariance()
+		if (this.haveAndOperator()) this.changeToCovariance(false)
 	}
 
 	haveAndOperator = () => {
 		let { isVarianceStructure, expression } = { ...this.state }
 		return (
-			!isVarianceStructure &&
+			!!isVarianceStructure &&
 			expression.some(expr => expr.props.label === '&')
 		)
 	}
@@ -39,7 +39,7 @@ class RandomModel extends Expression {
 						)
 					}
 				>
-					OPERAND
+					Operand
 				</button>
 				<button
 					disabled={this.state.isEnd}
@@ -49,9 +49,10 @@ class RandomModel extends Expression {
 						)
 					}
 				>
-					OPERAND
+					Operator
 				</button>
 				{this.state.expression.map(expr => expr)}
+				{this.getJsonExpression()}
 			</div>
 		)
 	}
