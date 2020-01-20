@@ -1,16 +1,25 @@
 import React from 'react'
-import Expression from './Components/Expression/Expression'
+import FixedModel from './Components/Expression/Expression'
 import RandomModel from './Components/Expression/RandomModel'
+import ResidualModel from './Components/Expression/ResidualModel'
+
+const fixedModelProps = { name: 'Fixed Model', allowOperators: ['+', '.'] }
+const randomModelProps = {
+	name: 'Random Model',
+	allowOperators: ['+', '.', '||', '&']
+}
+const residualModelProps = {
+	name: 'Random Model',
+	allowOperators: ['.', '||']
+}
 
 class App extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				<Expression name="Fixed Model" allowOperators={['+', '.']} />
-				<RandomModel
-					name="Random Model"
-					allowOperators={['+', '.', '&', '||']}
-				/>
+				<FixedModel {...fixedModelProps} />
+				<RandomModel {...randomModelProps} />
+				<ResidualModel {...residualModelProps} />
 			</div>
 		)
 	}

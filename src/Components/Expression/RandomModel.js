@@ -11,16 +11,15 @@ class RandomModel extends Expression {
 	haveAndOperator = () => {
 		let { isVarianceStructure, expression } = { ...this.state }
 		return (
-			!!isVarianceStructure &&
-			expression.some(expr => expr.props.label === '&')
+			!!isVarianceStructure && expression.some(expr => expr.label === '&')
 		)
 	}
 	haveOrOperator = () => {
 		let { isEnd, expression } = { ...this.state }
 		return (
 			!isEnd &&
-			expression.some(expr => expr.props.label === '||') &&
-			expression.slice(-1)[0].props.Class === 'value'
+			expression.some(expr => expr.label === '||') &&
+			expression.slice(-1)[0].Class === 'value'
 		)
 	}
 
@@ -51,7 +50,7 @@ class RandomModel extends Expression {
 				>
 					Operator
 				</button>
-				{this.state.expression.map(expr => expr)}
+				{this.renderParameters()}
 				{this.getJsonExpression()}
 			</div>
 		)

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react'
-class Parameter extends PureComponent {
+import React, { Component } from 'react'
+class Parameter extends Component {
 	constructor(props) {
 		super(props)
 		const { label, Class, values, typeOfCal } = { ...props }
 		this.state = {
-			label: label,
-			Class: Class,
-			values: values,
-			typeOfCal: typeOfCal,
+			label,
+			Class,
+			values,
+			typeOfCal,
 			isOperator: Class === 'operator' ? true : false
 		}
 	}
@@ -26,7 +26,7 @@ class Parameter extends PureComponent {
 	render() {
 		return (
 			<>
-				<h4>{`${this.state.label} | ${this.state.typeOfCal} | ${this.state.Class}`}</h4>
+				<p>{`${this.state.label} | ${this.state.typeOfCal} | ${this.state.Class}`}</p>
 			</>
 		)
 	}

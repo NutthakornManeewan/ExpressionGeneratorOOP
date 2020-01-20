@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import Parameter from '../Parameter'
 import CreateNewParam from '../../utils/createNewParam'
 class Expression extends Component {
 	constructor(props) {
@@ -37,22 +36,20 @@ class Expression extends Component {
 		return JSON.stringify({
 			name: this.state.name,
 			isVarianceStructure: this.state.isVarianceStructure,
-			expression: this.state.expression.map(expr => expr.props)
+			expression: this.state.expression.map(expr => expr)
 		})
 	}
 
 	// private method (virtual)
 	updateExpression = (expression_list, param) => {
 		let { size, allowPushOperand } = { ...this.state }
-		expression_list.push(
-			<Parameter
-				key={_.uniqueId('param_')}
-				label={param.label}
-				values={param.values}
-				Class={param.Class}
-				typeOfCal={param.typeOfCal}
-			/>
-		)
+		expression_list.push({
+			key: _.uniqueId('param_'),
+			label: param.label,
+			values: param.values,
+			Class: param.Class,
+			typeOfCal: param.typeOfCal
+		})
 		size = expression_list.length
 		allowPushOperand = !allowPushOperand
 		this.setState({ size, allowPushOperand, expression: expression_list })
@@ -60,6 +57,12 @@ class Expression extends Component {
 
 	isOperatorAllows = operator => {
 		return this.state.allowOperators.some(ope => ope === operator)
+	}
+
+	renderParameters = () => {
+		return this.state.expression.map(expr => (
+			<p key={expr.key}>{expr.label}</p>
+		))
 	}
 
 	render() {
@@ -87,7 +90,7 @@ class Expression extends Component {
 				>
 					OPERAND
 				</button>
-				{this.state.expression.map(expr => expr)}
+				{this.renderParameters()}
 				{this.getJsonExpression()}
 			</div>
 		)
